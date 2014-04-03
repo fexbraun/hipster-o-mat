@@ -1,0 +1,9 @@
+anotherString: BedCon
+
+server:
+  type: simple
+  applicationContextPath: /
+  adminContextPath: /admin
+  connector:
+    type: http
+    port: 12345
