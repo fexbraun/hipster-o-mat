@@ -1,19 +1,24 @@
-
 package com.ax.bedcon.config;
-
-import javax.validation.constraints.NotNull;
-
-import org.hibernate.validator.constraints.NotEmpty;
 
 import io.dropwizard.Configuration;
 
-public class HipsterConfiguration extends Configuration
-{
+import javax.validation.constraints.Min;
+
+import org.hibernate.validator.constraints.NotEmpty;
+
+public class HipsterConfiguration extends Configuration {
 
 	@NotEmpty
-	String anotherString;
-	
-	public String getAnotherString() {
-		return anotherString;
+	String conferenceName;
+
+	@Min(2000)
+	int year;
+
+	public String getConferenceName() {
+		return conferenceName;
+	}
+
+	public int getYear() {
+		return year;
 	}
 }

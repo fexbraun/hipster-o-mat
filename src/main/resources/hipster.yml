@@ -1,4 +1,5 @@
-anotherString: BedCon
+conferenceName: BedCon
+year: 2014
 
 server:
   type: simple

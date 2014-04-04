@@ -28,7 +28,8 @@ public class HipsterApplication extends Application<HipsterConfiguration> {
 	@Override
 	public void run(final HipsterConfiguration configuration,
 			final Environment environment) throws Exception {
-		System.out.println("Hello " + configuration.getAnotherString());
+		System.out.println("Hello " + configuration.getConferenceName()
+				+ configuration.getYear());
 
 		final HipsterStore store = new HipsterStore();
 		HipsterResource resource = new HipsterResource(store);
