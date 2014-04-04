@@ -10,11 +10,9 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.WebApplicationException;
-import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
-import javax.ws.rs.core.UriInfo;
 
 import com.ax.bedcon.HipsterStore;
 import com.ax.bedcon.entity.Hipster;
@@ -33,11 +31,7 @@ public class HipsterResource {
 	}
 
 	@POST
-	public Response addHipster(final Hipster hipster,
-			@Context final UriInfo uriInfo) throws URISyntaxException {
-		hipster.setImagePath(uriInfo.getAbsolutePath().toString() //
-				+ "-images/" + hipster.getName() + ".jpg");
-
+	public Response addHipster(final Hipster hipster) throws URISyntaxException {
 		store.store(hipster);
 		return Response.created(new URI("/" + hipster.getName())).build();
 	}
@@ -45,8 +39,7 @@ public class HipsterResource {
 	@GET
 	@Timed
 	@Path("{name}")
-	public Hipster getHipster(@PathParam("name") final String name,
-			@Context final UriInfo uriInfo) {
+	public Hipster getHipster(@PathParam("name") final String name) {
 		final Optional<Hipster> hipster = store.get(name);
 		if (hipster.isPresent()) {
 			return hipster.get();
@@ -58,7 +51,7 @@ public class HipsterResource {
 	@GET
 	@Path("{name}/view")
 	@Produces({ MediaType.TEXT_HTML, MediaType.APPLICATION_JSON })
-	public HipsterView getHipster(@PathParam("name") String name) {
+	public HipsterView getHipsterView(@PathParam("name") String name) {
 		Optional<Hipster> hipster = store.get(name);
 		return new HipsterView(hipster.get());
 	}
