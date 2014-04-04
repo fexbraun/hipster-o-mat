@@ -18,6 +18,7 @@ import javax.ws.rs.core.UriInfo;
 
 import com.ax.bedcon.HipsterStore;
 import com.ax.bedcon.entity.Hipster;
+import com.ax.bedcon.view.HipsterView;
 import com.codahale.metrics.annotation.Timed;
 import com.google.common.base.Optional;
 
@@ -52,5 +53,13 @@ public class HipsterResource {
 		} else {
 			throw new WebApplicationException(Status.NOT_FOUND);
 		}
+	}
+
+	@GET
+	@Path("{name}/view")
+	@Produces({ MediaType.TEXT_HTML, MediaType.APPLICATION_JSON })
+	public HipsterView getHipster(@PathParam("name") String name) {
+		Optional<Hipster> hipster = store.get(name);
+		return new HipsterView(hipster.get());
 	}
 }

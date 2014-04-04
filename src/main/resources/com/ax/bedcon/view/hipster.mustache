@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Hipster</title>
+	<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.4.2/pure-min.css">
+ 	<link rel="stylesheet" href="../../hipsters-images/css/main-grid.css">
+ 	<link rel="stylesheet" href="../../hipsters-images/css/layouts/blog.css">
+</head>
+<body>
+
+{{#hipster}}
+<div id="layout" class="pure-g">
+    <div class="sidebar pure-u-1 pure-u-med-1-4">
+        <div class="header">
+            <hgroup>
+                <h1 class="brand-title">Sample Hipster #{{id}}</h1>
+                <h2 class="brand-tagline">All about '{{name}}'</h2>
+             </hgroup>
+        </div>
+    </div>
+
+    <div class="content pure-u-1 pure-u-med-3-4">
+        <div>
+            <div class="posts">
+                <h1 class="content-subhead">{{name}}</h1>
+
+                <section class="post">
+                    <header class="post-header">
+                        <img class="post-avatar" src="{{imagePath}}">
+
+                        <h2 class="post-title">{{name}} the hipster</h2>
+
+                        <p class="post-meta">
+                            Brought to you by <a class="post-category post-category-design">Dropwizard</a> and <a class="post-category post-category-pure">Mustache</a>
+                        </p>
+                    </header>
+
+                    <div class="post-description">
+                        <p>
+                            Here we have some more information about the hipster. And about Mustache: Mustache can be used for HTML, config files, source code - anything. It works by expanding tags in a template using values provided in a hash or object. </p>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>
+{{/hipster}}
+
+<script src="http://yui.yahooapis.com/3.14.1/build/yui/yui-min.js"></script>
+<script>
+YUI().use('node-base', 'node-event-delegate', function (Y) {
+    // This just makes sure that the href="#" attached to the <a> elements
+    // don't scroll you back up the page.
+    Y.one('body').delegate('click', function (e) {
+        e.preventDefault();
+    }, 'a[href="#"]');
+});
+</script>
+
+
+
+
+
+</body>
+</html>

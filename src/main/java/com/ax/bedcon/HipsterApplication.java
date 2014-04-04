@@ -4,6 +4,7 @@ import io.dropwizard.Application;
 import io.dropwizard.assets.AssetsBundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
+import io.dropwizard.views.ViewBundle;
 
 import com.ax.bedcon.config.HipsterConfiguration;
 import com.ax.bedcon.health.HipsterServiceHealthCheck;
@@ -17,6 +18,8 @@ public class HipsterApplication extends Application<HipsterConfiguration> {
 
 	@Override
 	public void initialize(final Bootstrap<HipsterConfiguration> bootstrap) {
+
+		bootstrap.addBundle(new ViewBundle());
 
 		bootstrap.addBundle(new AssetsBundle("/image-folder",
 				"/hipsters-images"));
