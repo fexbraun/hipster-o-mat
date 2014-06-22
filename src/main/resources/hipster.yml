@@ -1,3 +1,7 @@
+conferenceName: bedcon
+year: 2014
+
+
 server:
   type: simple
   applicationContextPath: /
