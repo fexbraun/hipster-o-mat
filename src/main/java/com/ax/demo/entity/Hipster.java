@@ -1,6 +1,7 @@
-package com.ax.bedcon.entity;
+package com.ax.demo.entity;
 
 public class Hipster {
+
 	public enum JeansType {
 		SKINNY, SUPERSKINNY;
 	}

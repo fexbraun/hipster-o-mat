@@ -1,10 +1,11 @@
-package com.ax.bedcon.view;
+package com.ax.demo.view;
 
 import io.dropwizard.views.View;
 
-import com.ax.bedcon.entity.Hipster;
+import com.ax.demo.entity.Hipster;
 
 public class HipsterView extends View {
+
 	private final Hipster hipster;
 
 	public HipsterView(Hipster hipster) {

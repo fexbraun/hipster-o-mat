@@ -1,6 +1,5 @@
-conferenceName: bedcon
+conferenceName: JUG-BB
 year: 2014
-
 
 server:
   type: simple

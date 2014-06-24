@@ -1,6 +1,6 @@
-package com.ax.bedcon.health;
+package com.ax.demo.health;
 
-import com.ax.bedcon.HipsterStore;
+import com.ax.demo.HipsterStore;
 import com.codahale.metrics.health.HealthCheck;
 
 public class HipsterServiceHealthCheck extends HealthCheck {

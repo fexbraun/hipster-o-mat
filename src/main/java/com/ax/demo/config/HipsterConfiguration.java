@@ -1,4 +1,4 @@
-package com.ax.bedcon.config;
+package com.ax.demo.config;
 
 import io.dropwizard.Configuration;
 

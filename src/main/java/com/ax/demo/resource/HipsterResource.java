@@ -1,4 +1,4 @@
-package com.ax.bedcon.resource;
+package com.ax.demo.resource;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -17,9 +17,9 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.UriInfo;
 
-import com.ax.bedcon.HipsterStore;
-import com.ax.bedcon.entity.Hipster;
-import com.ax.bedcon.view.HipsterView;
+import com.ax.demo.HipsterStore;
+import com.ax.demo.entity.Hipster;
+import com.ax.demo.view.HipsterView;
 import com.codahale.metrics.annotation.Timed;
 import com.google.common.base.Optional;
 import com.google.common.util.concurrent.Uninterruptibles;
@@ -37,8 +37,11 @@ public class HipsterResource {
 	@POST
 	public Response addHipster(final Hipster hipster,
 			@Context final UriInfo uriInfo) throws URISyntaxException {
-		hipster.setImagePath(uriInfo.getAbsolutePath().toString() //
-				+ "-images/" + hipster.getName() + ".jpg");
+
+		String imgPath = uriInfo.getBaseUriBuilder().path("hipster-images")
+				.path(hipster.getName() + ".jpg").build().toString();
+
+		hipster.setImagePath(imgPath);
 
 		store.store(hipster);
 		return Response.created(new URI("/" + hipster.getName())).build();
@@ -63,7 +66,6 @@ public class HipsterResource {
 	@Path("{name}/view")
 	@Produces({ MediaType.TEXT_HTML, MediaType.APPLICATION_JSON })
 	public HipsterView getHipsterView(@PathParam("name") String name) {
-		Optional<Hipster> hipster = store.get(name);
-		return new HipsterView(hipster.get());
+		return new HipsterView(getHipster(name));
 	}
 }

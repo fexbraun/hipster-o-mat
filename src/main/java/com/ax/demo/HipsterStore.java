@@ -1,10 +1,10 @@
-package com.ax.bedcon;
+package com.ax.demo;
 
 import io.dropwizard.lifecycle.Managed;
 
 import java.util.HashMap;
 
-import com.ax.bedcon.entity.Hipster;
+import com.ax.demo.entity.Hipster;
 import com.google.common.base.Optional;
 import com.google.common.collect.Maps;
 

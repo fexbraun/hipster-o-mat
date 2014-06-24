@@ -30,7 +30,7 @@
               <transformers>
                 <transformer />
                 <transformer>
-                  <mainClass>com.ax.bedcon.HipsterApplication</mainClass>
+                  <mainClass>com.ax.demo.HipsterApplication</mainClass>
                 </transformer>
               </transformers>
             </configuration>

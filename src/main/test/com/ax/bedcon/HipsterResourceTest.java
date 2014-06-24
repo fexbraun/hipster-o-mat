@@ -1,4 +1,4 @@
-package com.ax.bedcon;
+package com.ax.demo;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
@@ -11,9 +11,9 @@ import org.junit.ClassRule;
 import org.junit.Test;
 import org.mockito.Matchers;
 
-import com.ax.bedcon.entity.Hipster;
-import com.ax.bedcon.entity.Hipster.JeansType;
-import com.ax.bedcon.resource.HipsterResource;
+import com.ax.demo.entity.Hipster;
+import com.ax.demo.entity.Hipster.JeansType;
+import com.ax.demo.resource.HipsterResource;
 import com.google.common.base.Optional;
 
 public class HipsterResourceTest {
