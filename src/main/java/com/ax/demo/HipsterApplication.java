@@ -9,6 +9,7 @@ import io.dropwizard.views.ViewBundle;
 import com.ax.demo.config.HipsterConfiguration;
 import com.ax.demo.health.HipsterServiceHealthCheck;
 import com.ax.demo.resource.HipsterResource;
+import com.google.common.collect.ImmutableMap;
 
 public class HipsterApplication extends Application<HipsterConfiguration> {
 
@@ -21,7 +22,13 @@ public class HipsterApplication extends Application<HipsterConfiguration> {
 		bootstrap
 				.addBundle(new AssetsBundle("/image-folder", "/hipster-images"));
 
-		bootstrap.addBundle(new ViewBundle());
+		bootstrap.addBundle(new ViewBundle<HipsterConfiguration>() {
+			@Override
+			public ImmutableMap<String, ImmutableMap<String, String>> getViewConfiguration(
+					HipsterConfiguration config) {
+				return config.getViewRendererConfiguration();
+			}
+		});
 	}
 
 	@Override
