@@ -1,8 +1,15 @@
 package com.ax.demo.health;
 
+import com.ax.demo.HipsterApplication;
 import com.ax.demo.HipsterStore;
 import com.codahale.metrics.health.HealthCheck;
 
+/**
+ * The Class HipsterServiceHealthCheck is a simple {@link HealthCheck}.
+ * <p>
+ * It is registered to the application in the
+ * {@link HipsterApplication#run(String...)} method.
+ */
 public class HipsterServiceHealthCheck extends HealthCheck {
 
 	private final HipsterStore store;

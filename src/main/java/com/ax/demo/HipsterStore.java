@@ -8,6 +8,10 @@ import com.ax.demo.entity.Hipster;
 import com.google.common.base.Optional;
 import com.google.common.collect.Maps;
 
+/**
+ * The Class HipsterStore is a mem-only storage for {@link Hipster} entities. It
+ * simulates a persistent storage for this demo project.
+ */
 public class HipsterStore implements Managed {
 
 	final HashMap<String, Hipster> internalStore = Maps.newHashMap();

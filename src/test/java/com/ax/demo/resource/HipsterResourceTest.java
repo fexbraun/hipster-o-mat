@@ -1,55 +1,45 @@
 package com.ax.demo.resource;
 
 import static org.junit.Assert.assertEquals;
-import io.dropwizard.testing.junit.DropwizardAppRule;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+import io.dropwizard.testing.junit.ResourceTestRule;
 
-import javax.ws.rs.client.Client;
-import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.client.Entity;
-import javax.ws.rs.core.MediaType;
-
-import org.glassfish.jersey.client.ClientResponse;
+import org.junit.Before;
 import org.junit.ClassRule;
 import org.junit.Test;
+import org.mockito.Matchers;
 
-import com.ax.demo.HipsterApplication;
-import com.ax.demo.config.HipsterConfiguration;
+import com.ax.demo.HipsterStore;
 import com.ax.demo.entity.Hipster;
 import com.ax.demo.entity.Hipster.JeansType;
+import com.google.common.base.Optional;
 
 public class HipsterResourceTest {
 
-	private static final String CONFIG_PATH = "src/main/resources/hipster.yml";
+	private static final HipsterStore store = mock(HipsterStore.class);
 
 	@ClassRule
-	public static final DropwizardAppRule<HipsterConfiguration> RULE = new DropwizardAppRule<HipsterConfiguration>(
-			HipsterApplication.class, CONFIG_PATH);
+	public static final ResourceTestRule resources = ResourceTestRule.builder()
+			.addResource(new HipsterResource(store)).build();
 
-	@Test
-	public void test() {
-		Client client = ClientBuilder.newClient();
+	private Hipster hipster;
 
-		Hipster fooHipster = getHipster("foo");
+	@Before
+	public void setup() {
+		hipster = new Hipster(4, "Foo", JeansType.SKINNY, true, "image.jpg");
 
-		ClientResponse response = client
-				.target(String.format("http://localhost:%d",
-						RULE.getLocalPort())).path("hipsters")
-				.request(MediaType.APPLICATION_JSON)
-				.post(Entity.json(fooHipster), ClientResponse.class);
-
-		assertEquals(201, response.getStatus());
-
-		Hipster hipReceived = client
-				.target(String.format("http://localhost:%d/hipsters/foo",
-						RULE.getLocalPort()))
-				.request(MediaType.APPLICATION_JSON).get(Hipster.class);
-
-		assertEquals(fooHipster, hipReceived);
-
+		when(store.get(Matchers.eq("Foo"))).//
+				thenReturn(Optional.of(hipster));
 	}
 
-	private Hipster getHipster(String name) {
-		return new Hipster(1, name, JeansType.SKINNY, false, "");
+	@Test
+	public void testGetHipster() {
+		assertEquals(resources.client().target("/hipsters/Foo")//
+				.request().get(Hipster.class), hipster);
+
+		verify(store).get("Foo");
 	}
 
 }

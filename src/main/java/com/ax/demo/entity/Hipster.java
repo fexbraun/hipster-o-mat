@@ -1,12 +1,19 @@
 package com.ax.demo.entity;
 
+import javax.validation.constraints.Min;
+
+/**
+ * A Hipster. Used as entity in this demo application.
+ */
 public class Hipster {
 
 	public enum JeansType {
 		SKINNY, SUPERSKINNY;
 	}
 
+	@Min(value = 0, message = "Id must be positive")
 	private int id;
+
 	private String name;
 	private JeansType jeans;
 	private boolean hornRimmedGlasses;

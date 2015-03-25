@@ -10,6 +10,7 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.ImmutableMap;
 
 public class HipsterConfiguration extends Configuration {
@@ -20,6 +21,8 @@ public class HipsterConfiguration extends Configuration {
 	@Min(2000)
 	private int year;
 
+	// unfortunate change in Dropwizard 0.8 make this complex view configuration
+	// object necessary. Hopefully fixed in next release
 	@NotNull
 	private ImmutableMap<String, ImmutableMap<String, String>> viewRendererConfiguration = ImmutableMap
 			.of();
@@ -28,15 +31,24 @@ public class HipsterConfiguration extends Configuration {
 		return conferenceName;
 	}
 
+	@VisibleForTesting
+	public void setConferenceName(String conferenceName) {
+		this.conferenceName = conferenceName;
+	}
+
 	public int getYear() {
 		return year;
 	}
 
+	// unfortunate change in Dropwizard 0.8 make this complex view configuration
+	// object necessary. Hopefully fixed in next release
 	@JsonProperty("viewRendererConfiguration")
 	public ImmutableMap<String, ImmutableMap<String, String>> getViewRendererConfiguration() {
 		return viewRendererConfiguration;
 	}
 
+	// unfortunate change in Dropwizard 0.8 make this complex view configuration
+	// object necessary. Hopefully fixed in next release
 	@JsonProperty("viewRendererConfiguration")
 	public void setViewRendererConfiguration(
 			Map<String, Map<String, String>> viewRendererConfiguration) {

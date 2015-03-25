@@ -4,6 +4,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.concurrent.TimeUnit;
 
+import javax.validation.Valid;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -19,11 +20,16 @@ import javax.ws.rs.core.UriInfo;
 
 import com.ax.demo.HipsterStore;
 import com.ax.demo.entity.Hipster;
+import com.ax.demo.entity.Pong;
 import com.ax.demo.view.HipsterView;
 import com.codahale.metrics.annotation.Timed;
 import com.google.common.base.Optional;
 import com.google.common.util.concurrent.Uninterruptibles;
 
+/**
+ * The Class HipsterResource allows clients to add and get hipsters from the
+ * store. JAX-RS annotations are used to define the resource methods.
+ */
 @Path("/hipsters")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
@@ -34,8 +40,20 @@ public class HipsterResource {
 		this.store = store;
 	}
 
+	/**
+	 * This test method has only a foo comment.
+	 * 
+	 * @return the pong is a pong.
+	 */
+	@GET
+	@Timed
+	@Path("ping")
+	public Pong pingPong() {
+		return new Pong();
+	}
+
 	@POST
-	public Response addHipster(final Hipster hipster,
+	public Response addHipster(@Valid final Hipster hipster,
 			@Context final UriInfo uriInfo) throws URISyntaxException {
 
 		String imgPath = uriInfo.getBaseUriBuilder().path("hipster-images")
@@ -62,6 +80,11 @@ public class HipsterResource {
 		}
 	}
 
+	/**
+	 * This method delivers either an fully fledged html page when accessed with
+	 * a web browser (Accept: text/html) or it delivers the raw {@link Hipster}
+	 * json representation when accessed with "Accept: application/json".
+	 */
 	@GET
 	@Path("{name}/view")
 	@Produces({ MediaType.TEXT_HTML, MediaType.APPLICATION_JSON })
