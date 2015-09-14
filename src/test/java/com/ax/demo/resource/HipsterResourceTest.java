@@ -14,6 +14,7 @@ import org.mockito.Matchers;
 import com.ax.demo.HipsterStore;
 import com.ax.demo.entity.Hipster;
 import com.ax.demo.entity.Hipster.JeansType;
+import com.ax.demo.entity.Pong;
 import com.google.common.base.Optional;
 
 public class HipsterResourceTest {
@@ -40,6 +41,13 @@ public class HipsterResourceTest {
 				.request().get(Hipster.class), hipster);
 
 		verify(store).get("Foo");
+	}
+	
+	@Test
+	public void testPingPong() throws Exception {
+		Pong pong = new Pong();
+		assertEquals(resources.client().target("/hipsters/ping")//
+				.request().get(Pong.class), pong);
 	}
 
 }

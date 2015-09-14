@@ -1,17 +1,14 @@
 package com.ax.demo.config;
 
-import io.dropwizard.Configuration;
-
-import java.util.Map;
-
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.annotations.VisibleForTesting;
-import com.google.common.collect.ImmutableMap;
+
+import io.dropwizard.Configuration;
+import io.federecio.dropwizard.swagger.SwaggerBundleConfiguration;
 
 public class HipsterConfiguration extends Configuration {
 
@@ -20,12 +17,6 @@ public class HipsterConfiguration extends Configuration {
 
 	@Min(2000)
 	private int year;
-
-	// unfortunate change in Dropwizard 0.8 make this complex view configuration
-	// object necessary. Hopefully fixed in next release
-	@NotNull
-	private ImmutableMap<String, ImmutableMap<String, String>> viewRendererConfiguration = ImmutableMap
-			.of();
 
 	public String getConferenceName() {
 		return conferenceName;
@@ -40,25 +31,15 @@ public class HipsterConfiguration extends Configuration {
 		return year;
 	}
 
-	// unfortunate change in Dropwizard 0.8 make this complex view configuration
-	// object necessary. Hopefully fixed in next release
-	@JsonProperty("viewRendererConfiguration")
-	public ImmutableMap<String, ImmutableMap<String, String>> getViewRendererConfiguration() {
-		return viewRendererConfiguration;
+	
+	@JsonProperty("swagger")
+    public SwaggerBundleConfiguration swaggerBundleConfiguration;
+  
+	
+	public SwaggerBundleConfiguration getSwaggerBundleConfiguration() {
+		return swaggerBundleConfiguration;
 	}
-
-	// unfortunate change in Dropwizard 0.8 make this complex view configuration
-	// object necessary. Hopefully fixed in next release
-	@JsonProperty("viewRendererConfiguration")
-	public void setViewRendererConfiguration(
-			Map<String, Map<String, String>> viewRendererConfiguration) {
-		ImmutableMap.Builder<String, ImmutableMap<String, String>> builder = ImmutableMap
-				.builder();
-		for (Map.Entry<String, Map<String, String>> entry : viewRendererConfiguration
-				.entrySet()) {
-			builder.put(entry.getKey(), ImmutableMap.copyOf(entry.getValue()));
-		}
-		this.viewRendererConfiguration = builder.build();
-	}
+	
+	
 
 }

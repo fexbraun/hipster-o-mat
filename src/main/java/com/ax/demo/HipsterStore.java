@@ -1,12 +1,13 @@
 package com.ax.demo;
 
-import io.dropwizard.lifecycle.Managed;
-
+import java.util.Collection;
 import java.util.HashMap;
 
 import com.ax.demo.entity.Hipster;
 import com.google.common.base.Optional;
 import com.google.common.collect.Maps;
+
+import io.dropwizard.lifecycle.Managed;
 
 /**
  * The Class HipsterStore is a mem-only storage for {@link Hipster} entities. It
@@ -37,5 +38,9 @@ public class HipsterStore implements Managed {
 
 	public boolean isRunning() {
 		return running;
+	}
+
+	public Collection<Hipster> getAll() {
+		return internalStore.values();
 	}
 }

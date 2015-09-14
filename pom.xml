@@ -13,6 +13,11 @@
 
 	<dependencies>
 
+		<dependency>
+    		<groupId>com.smoketurner</groupId>
+    		<artifactId>dropwizard-swagger</artifactId>
+    		<version>0.7.1</version>
+		</dependency>
 
 		<!-- Dropwizard components -->
 		<dependency>
@@ -67,15 +72,15 @@
 							</docletArtifact>
 							<reportOutputDirectory>${project.build.outputDirectory}</reportOutputDirectory>
 							<useStandardDocletOptions>false</useStandardDocletOptions>
-							<additionalparam>-apiVersion 1 -docBasePath http://myapi
-								-apiBasePath http://myapi</additionalparam>
+							<additionalparam>-apiVersion 1 -docBasePath http://localhost:12345/doc
+								-apiBasePath http://localhost:12345/</additionalparam>
 						</configuration>
 						<goals>
 							<goal>javadoc</goal>
 						</goals>
 					</execution>
 				</executions>
-
+				
 			</plugin>
 
 
@@ -140,5 +145,5 @@
 		</plugins>
 	</build>
 
-	
+
 </project>

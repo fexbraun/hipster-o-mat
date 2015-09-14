@@ -3,9 +3,6 @@ package com.ax.demo;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import io.dropwizard.jersey.setup.JerseyEnvironment;
-import io.dropwizard.lifecycle.setup.LifecycleEnvironment;
-import io.dropwizard.setup.Environment;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -16,9 +13,14 @@ import com.ax.demo.health.HipsterServiceHealthCheck;
 import com.ax.demo.resource.HipsterResource;
 import com.codahale.metrics.health.HealthCheckRegistry;
 
+import io.dropwizard.jersey.setup.JerseyEnvironment;
+import io.dropwizard.lifecycle.setup.LifecycleEnvironment;
+import io.dropwizard.setup.Environment;
+
 public class HipsterApplicationTest {
 	private final Environment environment = mock(Environment.class);
 	private final JerseyEnvironment jersey = mock(JerseyEnvironment.class);
+	
 	private final HipsterApplication application = new HipsterApplication();
 	private final HipsterConfiguration config = new HipsterConfiguration();
 
@@ -41,6 +43,5 @@ public class HipsterApplicationTest {
 		verify(lifecycle).manage(Mockito.isA(HipsterStore.class));
 		verify(healthcheckReg).register(Mockito.anyString(),
 				Mockito.isA(HipsterServiceHealthCheck.class));
-
 	}
 }

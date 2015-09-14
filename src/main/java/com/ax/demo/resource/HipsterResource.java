@@ -2,6 +2,7 @@ package com.ax.demo.resource;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Collection;
 import java.util.concurrent.TimeUnit;
 
 import javax.validation.Valid;
@@ -50,6 +51,12 @@ public class HipsterResource {
 	@Path("ping")
 	public Pong pingPong() {
 		return new Pong();
+	}
+	
+	
+	@GET
+	public Collection<Hipster> getAllHipsters(){
+		return store.getAll();
 	}
 
 	@POST

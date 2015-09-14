@@ -8,3 +8,6 @@ server:
   connector:
     type: http
     port: 12345
+
+swagger:
+  resourcePackage: com.ax.demo.resource
